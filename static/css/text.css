@@ -1,3 +1,8 @@
 .medium-text {
     font-size: 1.5rem;
 }
+
+.text-shadow {
+    color: #FFFFFF;
+    text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+}
