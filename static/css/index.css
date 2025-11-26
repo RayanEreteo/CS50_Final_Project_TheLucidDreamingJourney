@@ -1,4 +1,11 @@
+body, html {
+    overflow-x: hidden;
+}
+
 .index-main{
     background-image: url("../images/438.gif");
     background-size: cover;
+    background-position: bottom;
+    width: 100vw;
+    height: 100vh;
 }
