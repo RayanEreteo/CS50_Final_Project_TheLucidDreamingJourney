@@ -9,3 +9,10 @@ body, html {
     width: 100vw;
     height: 100vh;
 }
+
+.introduction-main{
+    background-color: darkblue;
+    padding-top: 1px;
+    width: 100vw;
+    height: 100vh;
+}
