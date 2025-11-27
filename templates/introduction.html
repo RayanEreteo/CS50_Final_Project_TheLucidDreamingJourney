@@ -1,5 +1,48 @@
 {% extends "layout.html" %}
 
-{%  block title %}
+{% block title %}
     Introduction
+{% endblock %}
+
+{% block main %}
+    <div class="introduction-main text-light">
+        <div class="container mt-5">
+            <h2 class="text-shadow">Introduction</h2>
+            <br>
+            <p>Welcome to <span class="important-text">"The Lucid Dreaming Journey"</span>. <br> In this page you will find information about the commonly used
+                method to induce a lucid dream.</p>
+            <p>As a beginner, it can be hard to find which method to use, so let me show you a table of the commonly used technique and if they are for you.</p>
+            <table class="table">
+                <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Difficulty</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dream Journaling</td>
+                        <td>Involve writing your dreams to improve dream recall, also useful to notice dream signs that may trigger lucidity.</td>
+                        <td>Very Easy</td>
+                    </tr>
+                    <tr>
+                        <td>Reality Checks</td>
+                        <td>The fundamental and most important method, reality checks. Involve literally checking if one is dreaming by being aware and testing your reality.</td>
+                        <td>Very Easy</td>
+                    </tr>
+                    <tr>
+                        <td>MILD (Mnemonic Induced Lucid Dream)</td>
+                        <td>Developed by Dr.Stephen Laberge. This method is one of the most commonly practiced lucid dream induction techniques out there and involve good prospective memory and intention.</td>
+                        <td>Easy</td>
+                    </tr>
+                    <tr>
+                        <td>WILD (Wake Initiated Lucid Dream)</td>
+                        <td>Developed by Dr.Stephen Laberge. This technique involve to keep the perfect balance between consciousness and falling asleep and can be hard to do for beginner.</td>
+                        <td>Medium / Hard</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Now it's on you to do your own research !</p>
+            <p>Check our <a href="/dreamjournal">Dream Journal</a> to begin recording your dreams !</p>
+        </div>
+    </div>
 {% endblock %}
