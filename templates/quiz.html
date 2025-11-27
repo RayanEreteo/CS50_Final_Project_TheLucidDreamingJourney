@@ -8,9 +8,11 @@
     <div class="blue-bg text-light d-flex flex-column justify-content-center align-items-center">
         <h2 class="text-shadow">Lucid Dreaming Quiz</h2>
         <div class="quiz-container text-black mt-5 border rounded bg-light">
-            <p class="question">Q1. What MILD mean ?</p>
+            <p class="question">Q1. {{q1}}</p>
             <div class="question-container p-4">
                 <div style="grid-template-columns: 1fr 1fr;" class="d-grid gap-3">
+                    <input type="hidden" name="current-q" value="1">
+
                     <button class="btn btn-primary col">Mnemonic Induced Lucid Dream</button>
                     <button class="btn btn-primary col">Mnemonic Induced Dream</button>
                     <button class="btn btn-primary col">Mild Induced Lucid Dream</button>
@@ -19,4 +21,23 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener("click", () => {
+                submitAnswer()
+            })
+        })
+
+        async function submitAnswer(){
+            const fd = new FormData();
+            fd.append("value", "test");
+
+
+            res = await fetch("/quiz", {method: "POST", body: fd})
+            data = await res.json()
+        }
+    </script>
 {% endblock %}
