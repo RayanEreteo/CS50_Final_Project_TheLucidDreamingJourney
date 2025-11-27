@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
@@ -15,6 +15,12 @@ def dream_journal():
     return render_template("journal.html", tab=2)
 
 
-@app.route("/quiz")
+@app.route("/quiz", methods=["GET","POST"])
 def quiz():
-    return render_template("quiz.html", tab=3)
+    answers = [{"title": "What MILD mean ?", "answer": "Mnemonic Induced Lucid Dream"}]
+    
+    if request.method == "POST":
+        value = request.form.get("value")
+        return jsonify({"message": value})
+    else:
+        return render_template("quiz.html", tab=3, q1=answers[0]["title"])
