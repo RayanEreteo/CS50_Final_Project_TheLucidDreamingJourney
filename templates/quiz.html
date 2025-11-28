@@ -34,12 +34,21 @@
         let loading = false
 
         async function submitAnswer(currentQuestion, btnSelected){
+            if (loading) {return}
+            loading = true
+
             const fd = new FormData();
             fd.append("answer", btnSelected.innerHTML);
             fd.append("current_question", currentQuestion)
 
-            res = await fetch("/quiz", {method: "POST", body: fd})
-            data = await res.json()
+            try {
+                res = await fetch("/quiz", {method: "POST", body: fd})
+                data = await res.json()
+            } catch (err) {
+                console.log("error fetch : " + err)
+            } finally {
+                loading = false
+            }
 
             if (data.verdict == "correct"){
                 correctButtonStyle(btnSelected)
@@ -53,7 +62,7 @@
 
         async function nextQuestion(){
             setTimeout(() => {
-                console.log("Retardée d'une seconde.");
+                switchQuestion()
             }, "1000");
         }
 
@@ -65,6 +74,10 @@
         function correctButtonStyle(button){
             button.classList.add("btn-success")
             button.classList.remove("btn-primary")
+        }
+
+        function switchQuestion(){
+
         }
     </script>
 {% endblock %}
