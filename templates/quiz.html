@@ -27,17 +27,43 @@
     <script>
         document.querySelectorAll('button').forEach(btn => {
             btn.addEventListener("click", () => {
-                submitAnswer()
+                submitAnswer(document.querySelector("input").value, btn)
             })
         })
 
-        async function submitAnswer(){
-            const fd = new FormData();
-            fd.append("value", "test");
+        async function submitAnswer(currentQuestion, btnSelected){
 
+            const fd = new FormData();
+            fd.append("answer", btnSelected.innerHTML);
+            fd.append("current_question", currentQuestion)
 
             res = await fetch("/quiz", {method: "POST", body: fd})
             data = await res.json()
+
+            if (data.verdict == "correct"){
+                correctButtonStyle(btnSelected)
+                nextQuestion()
+            } 
+            else{
+                incorrectButtonStyle(btnSelected)
+            }
+
+        }
+
+        async function nextQuestion(){
+            setTimeout(() => {
+                console.log("Retardée d'une seconde.");
+            }, "1000");
+        }
+
+        function incorrectButtonStyle(button){
+            button.classList.add("btn-danger")
+            button.classList.remove("btn-primary")
+        }
+
+        function correctButtonStyle(button){
+            button.classList.add("btn-success")
+            button.classList.remove("btn-primary")
         }
     </script>
 {% endblock %}
