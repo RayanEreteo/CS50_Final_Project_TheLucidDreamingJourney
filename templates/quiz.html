@@ -31,8 +31,9 @@
             })
         })
 
-        async function submitAnswer(currentQuestion, btnSelected){
+        let loading = false
 
+        async function submitAnswer(currentQuestion, btnSelected){
             const fd = new FormData();
             fd.append("answer", btnSelected.innerHTML);
             fd.append("current_question", currentQuestion)
