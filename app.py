@@ -20,7 +20,13 @@ def quiz():
     answers = [{"title": "What MILD mean ?", "answer": "Mnemonic Induced Lucid Dream"}]
     
     if request.method == "POST":
-        value = request.form.get("value")
-        return jsonify({"message": value})
+        user_answer = request.form.get("answer")
+        current_question = request.form.get("current_question")
+        current_question_answer = answers[int(current_question) - 1]
+        
+        if user_answer != current_question_answer["answer"]: 
+            return jsonify({"verdict": "incorrect"})
+        
+        return jsonify({"verdict": "correct"})
     else:
         return render_template("quiz.html", tab=3, q1=answers[0]["title"])
