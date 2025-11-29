@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -17,16 +18,25 @@ def dream_journal():
 
 @app.route("/quiz", methods=["GET","POST"])
 def quiz():
-    answers = [{"title": "What MILD mean ?", "answer": "Mnemonic Induced Lucid Dream"}]
+    with open("questions.json") as f:
+        questions = json.load(f)
     
     if request.method == "POST":
         user_answer = request.form.get("answer")
-        current_question = request.form.get("current_question")
-        current_question_answer = answers[int(current_question) - 1]
+        current_question_index = request.form.get("current_question")
+        current_question = questions[int(current_question_index) - 1]
         
-        if user_answer != current_question_answer["answer"]: 
+        print(current_question)
+        
+        if user_answer != current_question["answer"]: 
             return jsonify({"verdict": "incorrect"})
         
-        return jsonify({"verdict": "correct"})
+        if int(current_question_index) == len(questions):
+            return jsonify({"verdict": "end"}) 
+        return jsonify({"verdict": "correct", "next_question": questions[int(current_question_index)]})
     else:
-        return render_template("quiz.html", tab=3, q1=answers[0]["title"])
+        return render_template("quiz.html", tab=3, q1=questions[0]["title"], pa=questions[0]["possible_answer"])
+
+@app.route("/quizresult", methods=["GET","POST"])
+def quiz_result():
+    return render_template("quiz_result.html")
