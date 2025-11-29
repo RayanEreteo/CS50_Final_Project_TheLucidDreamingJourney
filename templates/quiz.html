@@ -26,6 +26,9 @@
         let loading = false
         let questionData = {}
 
+        let finalResult = 0
+        let canValidate = true
+
         document.querySelectorAll('button').forEach(btn => {
             btn.addEventListener("click", () => {
                 submitAnswer(questionNumber, btn)
@@ -51,11 +54,15 @@
 
             if (data.verdict == "correct"){
                 correctButtonStyle(btnSelected)
+                if (canValidate) {finalResult++}
                 nextQuestionDelay(data)
             }else if (data.verdict == "end"){
+                if (canValidate) {finalResult++}
+                localStorage.setItem("fr", finalResult.toString())
                 window.location.href = "/quizresult"
             } else{
                 incorrectButtonStyle(btnSelected)
+                canValidate = false
                 loading = false
             }
 
@@ -69,6 +76,7 @@
 
         async function switchQuestion(data){
             questionNumber++
+            canValidate = true
             questionData = data["next_question"]
             document.querySelector("#question-title").innerHTML = "Q" + questionNumber + "." + " " + questionData.title
 
