@@ -8,15 +8,12 @@
     <div class="blue-bg text-light d-flex flex-column justify-content-center align-items-center">
         <h2 class="text-shadow">Lucid Dreaming Quiz</h2>
         <div class="quiz-container text-black mt-5 border rounded bg-light">
-            <p class="question">Q1. {{q1}}</p>
+            <p id="question-title">Q1. {{q1}}</p>
             <div class="question-container p-4">
                 <div style="grid-template-columns: 1fr 1fr;" class="d-grid gap-3">
-                    <input type="hidden" name="current-q" value="1">
-
-                    <button class="btn btn-primary col">Mnemonic Induced Lucid Dream</button>
-                    <button class="btn btn-primary col">Mnemonic Induced Dream</button>
-                    <button class="btn btn-primary col">Mild Induced Lucid Dream</button>
-                    <button class="btn btn-primary col">This don't mean anything</button>
+                    {% for answer in pa %}
+                        <button class="btn btn-primary col">{{answer}}</button>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -25,45 +22,64 @@
 
 {% block scripts %}
     <script>
+        let questionNumber = 1
+        let loading = false
+        let questionData = {}
+
         document.querySelectorAll('button').forEach(btn => {
             btn.addEventListener("click", () => {
-                submitAnswer(document.querySelector("input").value, btn)
+                submitAnswer(questionNumber, btn)
             })
         })
 
-        let loading = false
 
-        async function submitAnswer(currentQuestion, btnSelected){
+        async function submitAnswer(questionNumber, btnSelected){
             if (loading) {return}
             loading = true
 
             const fd = new FormData();
             fd.append("answer", btnSelected.innerHTML);
-            fd.append("current_question", currentQuestion)
+            fd.append("current_question", questionNumber)
 
             try {
                 res = await fetch("/quiz", {method: "POST", body: fd})
                 data = await res.json()
             } catch (err) {
                 console.log("error fetch : " + err)
-            } finally {
                 loading = false
             }
 
             if (data.verdict == "correct"){
                 correctButtonStyle(btnSelected)
-                nextQuestion()
-            } 
-            else{
+                nextQuestionDelay(data)
+            }else if (data.verdict == "end"){
+                window.location.href = "/quizresult"
+            } else{
                 incorrectButtonStyle(btnSelected)
+                loading = false
             }
 
         }
 
-        async function nextQuestion(){
+        async function nextQuestionDelay(data){
             setTimeout(() => {
-                switchQuestion()
+                switchQuestion(data)
             }, "1000");
+        }
+
+        async function switchQuestion(data){
+            questionNumber++
+            questionData = data["next_question"]
+            document.querySelector("#question-title").innerHTML = "Q" + questionNumber + "." + " " + questionData.title
+
+            let index = 0
+            document.querySelectorAll('button').forEach(btn => {
+                defaultButtonStyle(btn)
+                btn.innerHTML = questionData.possible_answer[index - 1]
+                index++
+            })
+            index = 0
+            loading = false
         }
 
         function incorrectButtonStyle(button){
@@ -76,8 +92,12 @@
             button.classList.remove("btn-primary")
         }
 
-        function switchQuestion(){
-
+        function defaultButtonStyle(button){
+            if (button.classList.contains("btn-primary") == false){
+                button.classList.add("btn-primary")
+                button.classList.remove("btn-danger")
+                button.classList.remove("btn-success")
+            }
         }
     </script>
 {% endblock %}
