@@ -1,0 +1,42 @@
+[
+  {
+    "title": "What MILD mean ?",
+    "possible_answer": [
+      "Mnemonic Induced Lucid Dream",
+      "Mnemonic Induced Dream",
+      "Mild Induced Lucid Dream",
+      "This don't mean anything"
+    ],
+    "answer": "Mnemonic Induced Lucid Dream"
+  },
+  {
+    "title": "How many reality checks a day (minimum) ?",
+    "possible_answer": [
+      "34",
+      "3",
+      "10",
+      "10 and many more"
+    ],
+    "answer": "10 and many more"
+  },
+  {
+    "title": "How hard is WILD ?",
+    "possible_answer": [
+      "Very Hard",
+      "Mainly hard but some people may succeed",
+      "Mainly Impossible",
+      "Very Easy"
+    ],
+    "answer": "Mainly hard but some people may succeed"
+  },
+  {
+    "title": "What is lucid dreaming ?",
+    "possible_answer": [
+      "A dream where you are aware you're dreaming",
+      "A controllable dream",
+      "A vivid dream",
+      "It depends"
+    ],
+    "answer": "A dream where you are aware you're dreaming"
+  }
+]
