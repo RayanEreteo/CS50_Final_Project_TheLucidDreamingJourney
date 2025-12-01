@@ -39,32 +39,3 @@ def quiz():
 @app.route("/quizresult", methods=["GET","POST"])
 def quiz_result():
     return render_template("quiz_result.html")
-
-@app.route("/adddream", methods=["GET", "POST"])
-def add_dream():
-    if request.method == "POST":
-        return jsonify({"test": "test"})
-    else:
-        return render_template("add_dream.html")
-    
-@app.route("/deletedream")
-def delete_dream():
-    return redirect("/dreamjournal")
-
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        return redirect("/")
-    else:
-        return render_template("loginTemplates/register.html")
-
-@app.route("/login")
-def login():
-    if request.method == "POST":
-        return redirect("/")
-    else:
-        return render_template("loginTemplates/login.html")
-
-@app.route("/logout")
-def logout():
-    return redirect("/login")
