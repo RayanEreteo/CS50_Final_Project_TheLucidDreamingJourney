@@ -39,6 +39,6 @@ def quiz():
     else:
         return render_template("quiz.html", tab=3, q1=questions[0]["title"], pa=questions[0]["possible_answer"])
 
-@app.route("/quizresult", methods=["GET","POST"])
+@app.route("/quizresult")
 def quiz_result():
     return render_template("quiz_result.html")
