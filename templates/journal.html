@@ -5,15 +5,46 @@
 {% endblock %}
 
 {% block main %}
-    <div class="blue-bg text-light d-flex flex-column justify-content-center align-items-center">
-        <h2 class="text-shadow mb-5">Dream Journal</h2>
-        <div class="dream-container mb-5 border border-light">
-            <h5 id="dream-name">Dream Name</h5>
-            <p id="dream-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque porro facere nulla aspernatur repellat ex mollitia ipsam tempore exercitationem veniam.</p>
-        </div>
-        <div class="dream-container border border-light">
-            <h5 id="dream-name">Dream Name</h5>
-            <p id="dream-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque porro facere nulla aspernatur repellat ex mollitia ipsam tempore exercitationem veniam.</p>
+    <div class="modal" tabindex="-1" id="dream-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add a dream</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control mb-2" placeholder="Dream Title...">
+                    <textarea class="form-control mb-2" placeholder="Dream Content..."></textarea>
+                    <div class="mb-2">
+                        <input type="checkbox" id="is-lucid">
+                        <label for="checkbox">Lucid ?</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Dream</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="blue-bg text-light d-flex flex-column justify-content-center align-items-center">
+        <h2 class="text-shadow mb-5">Dream Journal</h2>
+        <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#dream-modal">
+            Add Dream
+        </button>
+        <div class="dreams-list">
+            <div class="dream-container mb-5 border border-light">
+                <h5 id="dream-name">Dream Name</h5>
+                <p id="dream-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque porro facere nulla aspernatur repellat ex mollitia ipsam tempore exercitationem veniam.</p>
+            </div>
+            <div class="dream-container border border-light">
+                <h5 id="dream-name">Dream Name</h5>
+                <p id="dream-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque porro facere nulla aspernatur repellat ex mollitia ipsam tempore exercitationem veniam.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
 {% endblock %}
