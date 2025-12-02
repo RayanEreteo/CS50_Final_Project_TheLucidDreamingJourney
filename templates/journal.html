@@ -12,8 +12,8 @@
                     <h5 class="modal-title">Add a dream</h5>
                 </div>
                 <div class="modal-body">
-                    <input type="text" class="form-control mb-2" placeholder="Dream Title...">
-                    <textarea class="form-control mb-2" style="height: 150px;" placeholder="Dream Content..."></textarea>
+                    <input type="text" class="form-control mb-2" id="dream-title" placeholder="Dream Title...">
+                    <textarea class="form-control mb-2" id="dream-desc" style="height: 150px;" placeholder="Dream Content..."></textarea>
                     <div class="mb-2">
                         <input type="checkbox" id="is-lucid">
                         <label for="checkbox">Lucid ?</label>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Dream</button>
+                    <button type="button" id="save-dream-btn" class="btn btn-primary">Save Dream</button>
                 </div>
             </div>
         </div>
@@ -46,5 +46,16 @@
 {% endblock %}
 
 {% block scripts %}
+    <script>
+        const saveDreamButton = document.getElementById("save-dream-btn")
+        const isLucidCheckbox = document.getElementById("is-lucid")
+        const dreamTitle = document.getElementById("dream-title")
+        const dreamDesc = document.getElementById("dream-desc")
 
+        saveDreamButton.addEventListener("click", () => {
+            const dream = [{ title: dreamTitle.value, desc: dreamDesc.value, lucid: isLucidCheckbox.checked}];
+            localStorage.setItem("dreams", JSON.stringify(dream));
+        });
+
+    </script>
 {% endblock %}
