@@ -1,5 +1,5 @@
-#TODO: Front end dream journal, add dream form, delete dream logic, download dream in file
-#TODO: Quiz Improvement, better logic (hide answer in client) and better quiz result page
+#TODO: delete dream logic, download dream in file
+#TODO: Quiz Improvement, better logic (hide answer in client) and better quiz result page and also add comments
 
 import json
 from flask import Flask, redirect, render_template, request, jsonify
