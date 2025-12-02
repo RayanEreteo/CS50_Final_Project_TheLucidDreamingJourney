@@ -51,7 +51,11 @@
     // Render dreams
     savedDreams.forEach(dream => {
         const dreamContainer = document.createElement("div");
-        dreamContainer.classList.add("dream-container", "mb-5", "border", "border-light");
+        dreamContainer.classList.add("dream-container", "mb-5", "border");
+
+        if (dream.lucid){
+            dreamContainer.classList.add("border-info")
+        }
 
         const dreamName = document.createElement("h5");
         dreamName.innerText = dream.title;
