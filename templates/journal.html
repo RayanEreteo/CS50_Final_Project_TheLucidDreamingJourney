@@ -32,30 +32,51 @@
         <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#dream-modal">
             Add Dream
         </button>
-        <div class="dreams-list">
-            <div class="dream-container mb-5 border border-light">
-                <h5 id="dream-name">Dream Name</h5>
-                <p id="dream-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque porro facere nulla aspernatur repellat ex mollitia ipsam tempore exercitationem veniam.</p>
-            </div>
-            <div class="dream-container border border-light">
-                <h5 id="dream-name">Dream Name</h5>
-                <p id="dream-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque porro facere nulla aspernatur repellat ex mollitia ipsam tempore exercitationem veniam.</p>
-            </div>
+        <div id="dreams-list">
         </div>
     </div>
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        const saveDreamButton = document.getElementById("save-dream-btn")
-        const isLucidCheckbox = document.getElementById("is-lucid")
-        const dreamTitle = document.getElementById("dream-title")
-        const dreamDesc = document.getElementById("dream-desc")
+<script>
+    const saveDreamButton = document.getElementById("save-dream-btn")
+    const isLucidCheckbox = document.getElementById("is-lucid")
+    const dreamTitle = document.getElementById("dream-title")
+    const dreamDesc = document.getElementById("dream-desc")
+    const dreamsList = document.getElementById("dreams-list")
 
-        saveDreamButton.addEventListener("click", () => {
-            const dream = [{ title: dreamTitle.value, desc: dreamDesc.value, lucid: isLucidCheckbox.checked}];
-            localStorage.setItem("dreams", JSON.stringify(dream));
-        });
+    // Load dreams
+    let savedDreams = JSON.parse(localStorage.getItem("dreams") || "[]");
 
-    </script>
+    // Render dreams
+    savedDreams.forEach(dream => {
+        const dreamContainer = document.createElement("div");
+        dreamContainer.classList.add("dream-container", "mb-5", "border", "border-light");
+
+        const dreamName = document.createElement("h5");
+        dreamName.innerText = dream.title;
+
+        const dreamDescription = document.createElement("p");
+        dreamDescription.innerText = dream.desc;
+
+        dreamContainer.appendChild(dreamName);
+        dreamContainer.appendChild(dreamDescription);
+
+        dreamsList.appendChild(dreamContainer);
+    });
+
+    // Save a dream
+    saveDreamButton.addEventListener("click", () => {
+        const newDream = {
+            title: dreamTitle.value,
+            desc: dreamDesc.value,
+            lucid: isLucidCheckbox.checked
+        };
+
+        savedDreams.push(newDream); // Add to array
+        localStorage.setItem("dreams", JSON.stringify(savedDreams)); // Save array
+
+        location.reload(); // Reload to re-render
+    });
+</script>
 {% endblock %}
