@@ -6,17 +6,18 @@ Quiz Results
 
 {% block main %}
     <div class="blue-bg text-light d-flex flex-column justify-content-center align-items-center">
-        <h2 class="text-shadow">Quiz Results</h2>
-        <p id="result">/4</p>
+        <h2 class="text-shadow mb-5">Quiz Results</h2>
+        <h3 id="result">/4</h3>
     </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
-        const finalResult = localStorage.getItem("fr")
         const resultText = document.querySelector("#result")
+        const finalResult = localStorage.getItem("fr")
 
-        resultText.innerHTML = finalResult + "/4"
+
+        resultText.innerHTML = "Quiz Result = " + finalResult + "/4"
     </script>
         
 {% endblock %}
