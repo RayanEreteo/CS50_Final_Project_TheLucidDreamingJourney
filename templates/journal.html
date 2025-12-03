@@ -63,8 +63,12 @@
         const dreamDescription = document.createElement("p");
         dreamDescription.innerText = dream.desc;
 
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete";
+
         dreamContainer.appendChild(dreamName);
         dreamContainer.appendChild(dreamDescription);
+        dreamContainer.appendChild(deleteButton);
 
         dreamsList.appendChild(dreamContainer);
     });
@@ -81,6 +85,20 @@
         localStorage.setItem("dreams", JSON.stringify(savedDreams)); // Save array
 
         location.reload(); // Reload to re-render
+    });
+
+    // Delete a dream
+    dreamsList.addEventListener("click", (e) => {
+        if (e.target.tagName === "BUTTON") {
+            const dreamContainer = e.target.parentElement;
+            const dreamTitle = dreamContainer.querySelector("h5").innerText;
+
+            // Remove from array
+            savedDreams = savedDreams.filter(dream => dream.title !== dreamTitle);
+            localStorage.setItem("dreams", JSON.stringify(savedDreams)); // Save array
+
+            location.reload(); // Reload to re-render
+        }
     });
 </script>
 {% endblock %}
