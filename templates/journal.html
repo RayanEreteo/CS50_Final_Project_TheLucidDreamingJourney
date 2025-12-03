@@ -29,9 +29,12 @@
 
     <div class="blue-bg text-light d-flex flex-column justify-content-center align-items-center">
         <h2 class="text-shadow mb-5">Dream Journal</h2>
-        <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#dream-modal">
-            Add Dream
-        </button>
+        <div class="options">
+            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#dream-modal">
+                Add Dream
+            </button>
+            <button type="button" id="save-file" class="btn btn-secondary">Save To JSON</button>
+        </div>
         <div id="dreams-list">
         </div>
     </div>
@@ -40,6 +43,7 @@
 {% block scripts %}
 <script>
     const saveDreamButton = document.getElementById("save-dream-btn")
+    const saveToFile = document.getElementById("save-file")
     const isLucidCheckbox = document.getElementById("is-lucid")
     const dreamTitle = document.getElementById("dream-title")
     const dreamDesc = document.getElementById("dream-desc")
@@ -51,7 +55,7 @@
     // Render dreams
     savedDreams.forEach(dream => {
         const dreamContainer = document.createElement("div");
-        dreamContainer.classList.add("dream-container", "mb-5", "border");
+        dreamContainer.classList.add("dream-container", "mb-5", "mt-3", "border");
 
         if (dream.lucid){
             dreamContainer.classList.add("border-info")
@@ -99,6 +103,17 @@
 
             location.reload(); // Reload to re-render
         }
+    });
+
+    // Save to file
+    saveToFile.addEventListener("click", () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(savedDreams, null, 2));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "dream_journal.json");
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
     });
 </script>
 {% endblock %}
