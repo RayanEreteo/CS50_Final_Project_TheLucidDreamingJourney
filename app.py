@@ -1,5 +1,3 @@
-#TODO: Quiz Improvement, better logic (hide answer in client) and better quiz result page and also add comments
-
 import json
 from flask import Flask, render_template, request, jsonify
 
