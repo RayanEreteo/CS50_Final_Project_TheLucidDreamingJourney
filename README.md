@@ -7,7 +7,7 @@ This app uses Flask and Jinja to render the HTML.
 
 My main tought was to make layout.html to reuse and implement the navbar, when rendering templates on the backend i will assign each template a "tab" value, and will be useful for the navbar links highlighting, example : when clicking **Introduction** once on the page the **Introduction** word on the navbar will light up
 
-First, the **Main Page**, contains a beautiful pixel art GIF that acts as a background, the title and a container that holds two links, one that redirects to the **Introduction** page and the other one on the **Dream Journal**.
+First, the **Main Page**, it contains a beautiful pixel art GIF that acts as a background, the title and a container that holds two links, one that redirects to the **Introduction** page and the other one on the **Dream Journal**.
 
 Then comes the Introduction page. It contains basic info about lucid dreaming methods and basic awareness tips. I used a table to display the methods and their difficulty level.
 
@@ -16,3 +16,4 @@ When clicking on the "Add Dream" button, it will fire a javascript function that
 For the dreams rendering on screen, javascript will get the dreams array and for each dream, render an html container with the dream info, name, desc and will change the border color based on lucidity.
 
 Finally my **Quiz** page
+
