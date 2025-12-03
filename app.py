@@ -34,7 +34,7 @@ def quiz():
         
         if int(current_question_index) == len(questions):
             return jsonify({"verdict": "end"}) 
-        return jsonify({"verdict": "correct", "next_question": questions[int(current_question_index)]})
+        return jsonify({"verdict": "correct", "next_question": {"title": questions[int(current_question_index)]["title"], "possible_answer": questions[int(current_question_index)]["possible_answer"]}})
     else:
         return render_template("quiz.html", tab=3, q1=questions[0]["title"], pa=questions[0]["possible_answer"])
 
