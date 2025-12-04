@@ -107,6 +107,7 @@
 
     // Save to file
     saveToFile.addEventListener("click", () => {
+        // CHAT-GPT USED
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(savedDreams, null, 2));
         const downloadAnchorNode = document.createElement('a');
         downloadAnchorNode.setAttribute("href", dataStr);
